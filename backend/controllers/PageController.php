@@ -63,17 +63,29 @@ class PageController extends Controller
         }
     }
    
-    public function actionView($id) {
+    public function actionView($id, $type) {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->render('view', [
-                'model' => $model
-            ]);
+        if ($type == 1) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->render('view', [
+                    'model' => $model
+                ]);
+            } else {
+                return $this->render('view', [
+                    'model' => $model
+                ]);
+            }    
         } else {
-            return $this->render('view', [
-                'model' => $model
-            ]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->render('index', [
+                    'model' => $model
+                ]);
+            } else {
+                return $this->render('index', [
+                    'model' => $model
+                ]);
+            }
         }
     }
     

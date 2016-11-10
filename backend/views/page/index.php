@@ -3,11 +3,11 @@
 use yii\helpers\Html;
 use kartik\detail\DetailView;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
+use kartik\widgets\FileInput;
 
 use kartik\markdown\Markdown;
 use kartik\markdown\MarkdownEditor;
-use kartik\widgets\FileInput;
-
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Page */
@@ -15,7 +15,6 @@ use kartik\widgets\FileInput;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
 
 $attributes = [
     [
@@ -31,15 +30,6 @@ $attributes = [
     [
         'attribute'=>'title', 
         'value'=>$model->title
-    ],
-    [
-        'attribute'=>'description', 
-        'format'=>'raw',
-        'value'=>Markdown::convert($model->description),
-        'type'=>DetailView::INPUT_WIDGET,
-        'widgetOptions'=>[
-            'class' => MarkdownEditor::classname()
-        ]
     ],
     [
         'group'=>true,
@@ -61,6 +51,7 @@ $attributes = [
 ];
 
 ?>
+
 <div class="row">
     <div class="col-xs-12">
 
@@ -68,12 +59,13 @@ $attributes = [
         'model'=>$model,
         'condensed'=>true,
         'hover'=>true,
+        'buttons1' => '{update}',
         'panel'=>[
             'heading'=>'Page Details',
             'type'=>DetailView::TYPE_INFO,
         ],
         'attributes' => $attributes,
-        'formOptions' => ['action' => Url::toRoute(['view','id'=>$model->page_id, 'type' => 1])]
+        'formOptions' => ['action' => Url::toRoute(['view','id'=>$model->page_id, 'type' => 2])]
     ]);?>
 
     </div>

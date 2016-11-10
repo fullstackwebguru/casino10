@@ -10,8 +10,8 @@ class SuperController extends Controller
 {
     public function actionInit()
     {
-        $adminEmail = Yii::$app->params["adminEmail"] ? Yii::$app->params["adminEmail"] : "admin@kitchenrating.com";
-        $supportEmail = Yii::$app->params["supportEmail"] ? Yii::$app->params["supportEmail"] : "support@kitchenrating.com";
+        $adminEmail = Yii::$app->params["adminEmail"] ? Yii::$app->params["adminEmail"] : "admin@Top5BestOnlineCasinos";
+        $supportEmail = Yii::$app->params["supportEmail"] ? Yii::$app->params["supportEmail"] : "support@Top5BestOnlineCasinos";
 
         $user = User::findByUsername("admin");
         if (!$user) {
