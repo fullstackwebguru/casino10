@@ -32,21 +32,13 @@ $modelAttributes = [
     ],
     [
         'attribute'=>'banner_heading', 
-        'format'=>'raw',
-        'value'=>Markdown::convert($model->banner_heading),
-        'type'=>DetailView::INPUT_WIDGET,
-        'widgetOptions'=>[
-            'class' => MarkdownEditor::classname()
-        ]
+        'value'=>$model->banner_heading,
+        'type'=>DetailView::INPUT_TEXTAREA
     ],
     [
         'attribute'=>'banner_subheading', 
-        'format'=>'raw',
-        'value'=>Markdown::convert($model->banner_subheading),
-        'type'=>DetailView::INPUT_WIDGET,
-        'widgetOptions'=>[
-            'class' => MarkdownEditor::classname()
-        ]
+        'value'=>$model->banner_subheading,
+        'type'=>DetailView::INPUT_TEXTAREA
     ],
 ];
 

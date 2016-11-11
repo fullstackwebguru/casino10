@@ -13,9 +13,12 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 
-use common\models\Product;
+use common\models\Company;
 use common\models\Category;
 use common\models\Guide;
+use common\models\Theme;
+use common\models\Page;
+
 
 /**
  * Site controller
@@ -39,14 +42,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $featuredProducts = Product::find()->where(['featured' => true])->all();
-        $popularTop10 = Category::find()->where(['popular' => true])->all();
-        $guides = Guide::find()->orderBy(['created_at' => 'desc'])->limit(4)->all();
-
+        $theme = $this->findMainTheme();
+        $category = $theme->category;
+        $model = $this->findModel('home');
         return $this->render('index', [
-            'featuredProducts' => $featuredProducts,
-            'popularTop10' => $popularTop10,
-            'guides' => $guides
+            'category' => $category,
+            'model' => $model,
         ]);
     }
 
@@ -57,75 +58,73 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $model = $this->findModel('about');
+        return $this->render('page', [
+            'model' => $model
+        ]);
     }
 
     public function actionPolicy()
     {
-        return $this->render('policy');
+        $model = $this->findModel('privacy');
+        return $this->render('page', [
+            'model' => $model
+        ]);
     }
 
     public function actionDisclaimer()
     {
-        return $this->render('disclaimer');
+        $model = $this->findModel('disclaimer');
+        return $this->render('page', [
+            'model' => $model
+        ]);
     }
 
     public function actionTos()
     {
-        return $this->render('tos');
+        $model = $this->findModel('tos');
+        return $this->render('page', [
+            'model' => $model
+        ]);
     }
 
     public function actionContact()
     {
-        return $this->render('contact');
-    }
-
-    /**
-     * Requests password reset.
-     *
-     * @return mixed
-     */
-    public function actionRequestPasswordReset()
-    {
-        $model = new PasswordResetRequestForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-
-                return $this->goHome();
-            } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for email provided.');
-            }
-        }
-
-        return $this->render('requestPasswordResetToken', [
-            'model' => $model,
+        $model = $this->findModel('contact');
+        return $this->render('page', [
+            'model' => $model
         ]);
     }
 
     /**
-     * Resets password.
-     *
-     * @param string $token
-     * @return mixed
-     * @throws BadRequestHttpException
+     * Finds the Page model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Page the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionResetPassword($token)
+    protected function findMainTheme()
     {
-        try {
-            $model = new ResetPasswordForm($token);
-        } catch (InvalidParamException $e) {
-            throw new BadRequestHttpException($e->getMessage());
+        if (($models = Theme::find()->all()) !== null && count($models) > 0)  {
+            return $models[0];
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password was saved.');
-
-            return $this->goHome();
+    /**
+     * Finds the Page model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Page the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Page::findOne(['page_id'=>$id])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
-
-        return $this->render('resetPassword', [
-            'model' => $model,
-        ]);
     }
 }

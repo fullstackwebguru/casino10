@@ -20,32 +20,11 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="http://allfont.net/allfont.css?fonts=montserrat-light" rel="stylesheet" type="text/css">
     <?php $this->head() ?>
 </head>
-<body class="home" id="site_body">
+<body>
 <?php $this->beginBody() ?>
-
-<a href="#site_body" class="go_to_top">
-  <i class="fa fa-angle-up"></i>
-</a>
-
-<div class="social_share">
-  <a href="https://facebook.com/share.php?u=https://kitchenrating.com&title=<?=$this->title?>" class="btnShare">
-    <span>Facebook</span>
-    <i class="fa fa-facebook"></i>
-  </a>
-  <a href="https://twitter.com/intent/tweet?status=<?=$this->title?>+https://kitchenratings.com" class="btnShare">
-    <span>Twitter</span>
-    <i class="fa fa-twitter"></i>
-  </a>
-  <a href="https://plus.google.com/share?url=https://kitchenratings.com" class="btnShare">
-    <span>Google</span>
-    <i class="fa fa-google"></i>
-  </a>
-</div>
-
-<div class="site_wraper">
 
     <?= $this->render(
         'header.php'
@@ -58,7 +37,6 @@ AppAsset::register($this);
     <?= $this->render(
         'footer.php'
     ) ?>   
-</div>
 <?php $this->endBody() ?>
 </body>
 </html>
