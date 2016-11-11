@@ -34,13 +34,12 @@ use yii\helpers\Html;
                 </div>
                 <div class="col-sm-4">
                     <div class="net-wrapp">
-                        <p class="title-info-2">NETWORK</p>
-                        <p class="info-text-2"><a href="#">Projects</a></p>
-                        <p class="info-text-2"><a href="#">Contests</a></p>
-                        <p class="info-text-2"><a href="#">Freelancer Local</a></p>
-                        <p class="info-text-2"><a href="#">Services</a></p>
-                        <p class="info-text-2"><a href="#">Escrow</a></p>
-                        <p class="info-text-2"><a href="#">Warrior Forum</a></p>
+                        <p class="title-info-2">SITE</p>
+                        <p class="info-text-2"><?=  Html::a('Home',['/']) ?></a></p>
+                        <p class="info-text-2"><?=  Html::a('Privacy',['/site/policy']) ?></p>
+                        <p class="info-text-2"><?=  Html::a('ToS',['/site/tos']) ?></p>
+                        <p class="info-text-2"><?=  Html::a('Disclamer',['/site/disclaimer']) ?></p>
+                        <p class="info-text-2"><?=  Html::a('Contact',['/site/contact']) ?></p>
                     </div>
                 </div>
                 <div class="col-sm-4">

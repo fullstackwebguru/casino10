@@ -2,8 +2,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-use frontend\widgets\Banner;
-
 /* @var $this \yii\web\View */
 /* @var $content string */
 ?>
@@ -30,11 +28,10 @@ use frontend\widgets\Banner;
                     <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="casino.html">Casino</a></li>
-                    <li><a href="casino-top10-full.html">Top 10</a></li>
-                    <li><a href="compare.html">Compare Casino</a></li>
-                    <li><a href="guide.html">Guide</a></li>
+                    <li><?=  Html::a('Home',['/']) ?></li>
+                    <li><?=  Html::a('Categories',['/category']) ?></li>
+                    <li><?=  Html::a('Compare Casino',['/compare']) ?></li>
+                    <li><?=  Html::a('Guide',['/guide']) ?></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -44,5 +41,3 @@ use frontend\widgets\Banner;
     <!-- End of Navigation -->
     <!-- top banner-->
 </header>
-
-<?= Banner::widget() ?>

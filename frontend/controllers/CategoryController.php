@@ -7,13 +7,13 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 
 use common\models\Category;
+use common\models\Page;
 
 /**
- * Top10 controllers
+ * Category controllers
  */
-class Top10Controller extends Controller
+class CategoryController extends Controller
 {
-
     /**
      * @inheritdoc
      */
@@ -22,36 +22,18 @@ class Top10Controller extends Controller
         return parent::beforeAction($action);
     }
 
+    public function actionIndex() {
+        $model = Page::findOne(['page_id'=>'categories']);
+        return $this->render('index', [
+            'model' => $model
+        ]);
+    }
+
     public function actionSlug($slug) 
     {
         $model = $this->findModelBySlug($slug);
         return $this->render('view', [
             'model' => $model
-        ]);   
-    }
-
-    public function actionGenerate($id)
-    {
-        if (Yii::$app->request->post('rank_option1')) {
-            $post['rank_option1'] = Yii::$app->request->post('rank_option1',0);
-            $post['rank_option2'] = Yii::$app->request->post('rank_option2',0);
-            $post['rank_option3'] = Yii::$app->request->post('rank_option3',0);
-        } else {
-            $post['rank_option1'] = 100;
-            $post['rank_option2'] = 50;
-            $post['rank_option3'] = 0;
-        }
-
-        arsort($post);
-        
-        $model = $this->findModel($id);
-        $products = $model->findTop10Products($post)->all();
-        foreach ($products as $i => $product) {
-            $result[] = $product;
-        }
-
-        return $this->renderPartial('_productList', [
-            'products' => $result
         ]);
     }
 

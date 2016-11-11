@@ -18,6 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $modelAttributes = [
     [
+        'group'=>true,
+        'label'=>'Main Category',
+        'rowOptions'=>['class'=>'info'],
+    ],
+    [
         'attribute'=>'category_id',
         'format'=>'raw',
         'value'=>$model->category_id == 1 ? $model->category->title : Html::a($model->category->title,  
@@ -31,6 +36,11 @@ $modelAttributes = [
         ]
     ],
     [
+        'group'=>true,
+        'label'=>'Main Banner',
+        'rowOptions'=>['class'=>'info'],
+    ],
+    [
         'attribute'=>'banner_heading', 
         'value'=>$model->banner_heading,
         'type'=>DetailView::INPUT_TEXTAREA
@@ -39,7 +49,7 @@ $modelAttributes = [
         'attribute'=>'banner_subheading', 
         'value'=>$model->banner_subheading,
         'type'=>DetailView::INPUT_TEXTAREA
-    ],
+    ]
 ];
 
 
@@ -70,7 +80,7 @@ if ($model->banner_image) {
         'hover'=>true,
         'buttons1' => '{update}',
         'panel'=>[
-            'heading'=>'Main Category',
+            'heading'=>'Site Setting',
             'type'=>DetailView::TYPE_INFO,
         ],
         'attributes' => $modelAttributes,
