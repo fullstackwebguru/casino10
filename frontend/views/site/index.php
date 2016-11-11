@@ -5,6 +5,7 @@
 use frontend\widgets\LatestGuide;
 use frontend\widgets\NewsletterBox;
 use frontend\widgets\Banner;
+use yii\helpers\Url;
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = $this->title;
@@ -40,19 +41,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php
 
                     $compIndex = 0;
-                    foreach($category->catComps as $catComp) {
+                    foreach($category->cateComps as $catComp) {
                         $company = $catComp->company;
 
                         $compIndex ++;
-                    }
-
                     ?>
 
                     <?php 
 
                     if ($compIndex == 1) {
-
-                    
+                
                     ?>
                     <tr id="first">
                         <td class="t-images-1"><img src="images/nr1.jpg" id="nr1" alt="nr1"></td>
@@ -64,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td class="offers"><p class="nr-desk"><?= $compIndex ?></p></td>
                     <?php } ?>
                         <td class="t-images">
-                            <a href="<?=Url::toRoute($product->getRoute())?>"><img src="images/table-img-1.jpg" class=" t-img" alt="casino-img"></a>
+                            <a href="<?=Url::toRoute($company->getRoute())?>"><img src="images/table-img-1.jpg" class=" t-img" alt="casino-img"></a>
                         </td>
                         <td class="offers">
                             <p class="offers-3"><?= $company->bonus_offer; ?> </p>
@@ -91,6 +89,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         </td>
                         <td class="btn-padd"><a href="#" class=" btn btn-md t-btn">GET BONUS</a></td>
                     </tr>
+
+                    <?php
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
